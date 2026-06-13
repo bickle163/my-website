@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CYP8图文内容工作台</title>
+    <link rel="stylesheet" href="styles.css?v=2" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="control-panel">
+        <div class="brand-block">
+          <div class="brand-mark">C8</div>
+          <div>
+            <h1>CYP8图文内容工作台</h1>
+            <p>面向欧洲LTC、康复中心和经销商的半自动图文生产系统</p>
+          </div>
+        </div>
+
+        <form id="briefForm" class="brief-form">
+          <label>
+            发布平台
+            <select id="platform">
+              <option value="facebook">Facebook</option>
+              <option value="google">Google Ads</option>
+              <option value="linkedin">LinkedIn</option>
+              <option value="website">独立站</option>
+              <option value="wechat" selected>朋友圈 / 小红书</option>
+            </select>
+          </label>
+
+          <label>
+            内容类型
+            <select id="format">
+              <option value="single">单图图文</option>
+              <option value="carousel">轮播图</option>
+              <option value="banner">Banner</option>
+              <option value="ad">广告文案</option>
+              <option value="landing">详情页模块</option>
+            </select>
+          </label>
+
+          <label>
+            海报模板
+            <select id="template">
+              <option value="moments">朋友圈方图 1080×1080</option>
+              <option value="xiaohongshu">小红书竖版 1080×1440</option>
+              <option value="hero">独立站Hero 1920×800</option>
+            </select>
+          </label>
+
+          <label>
+            目标客户
+            <select id="audience">
+              <option value="ltc">欧洲LTC长护中心</option>
+              <option value="rehab">康复中心 / 疼痛诊所</option>
+              <option value="wound">创面护理机构</option>
+              <option value="distributor">欧洲经销商</option>
+              <option value="director">机构负责人 / 采购主管</option>
+            </select>
+          </label>
+
+          <label>
+            内容主题
+            <select id="topic">
+              <option value="pain">老年慢性疼痛管理</option>
+              <option value="wound">难愈合创面管理</option>
+              <option value="ltc">长护中心服务升级</option>
+              <option value="tech">wIRA技术教育</option>
+              <option value="distributor">经销商招商</option>
+            </select>
+          </label>
+
+          <label>
+            视觉风格
+            <select id="tone">
+              <option value="warm">温暖护理感</option>
+              <option value="clinical">专业医学感</option>
+              <option value="tech">科技感</option>
+              <option value="business">B2B招商感</option>
+            </select>
+          </label>
+
+          <label>
+            输出语言
+            <select id="language">
+              <option value="en">英文</option>
+              <option value="zh" selected>中文</option>
+              <option value="bilingual">中英双语</option>
+            </select>
+          </label>
+
+          <label>
+            首选素材
+            <select id="asset">
+              <option value="product-real">真实产品图</option>
+              <option value="product-glow">真实发光图</option>
+              <option value="clinical-treatment">临床治疗图</option>
+              <option value="banner-1">官网Banner图1</option>
+              <option value="banner-2">官网Banner图2</option>
+              <option value="web-banner-en">英文网站Banner</option>
+              <option value="scenario-outdoor">场景图</option>
+              <option value="foot-ulcer-reference">足部创面参考图</option>
+            </select>
+          </label>
+
+          <label>
+            补充要求
+            <textarea id="note" rows="4" placeholder="例如：不要太医疗恐怖；强调预约演示；希望更像Facebook广告。"></textarea>
+          </label>
+
+          <div class="button-row">
+            <button type="button" id="generateBtn" class="primary-btn">生成图文</button>
+            <button type="button" id="resetBtn" class="secondary-btn">重置</button>
+          </div>
+        </form>
+      </aside>
+
+      <section class="workspace">
+        <section class="preview-zone">
+          <div class="poster-wrap" id="poster">
+            <img id="posterImage" src="assets/images/product-real.jpg" alt="CYP8素材预览" />
+            <div class="poster-brand">
+              <span>CYP8</span>
+              <span>wIRA Rehabilitation System</span>
+            </div>
+            <div class="poster-overlay">
+              <p id="posterKicker">For Long-Term Care Facilities</p>
+              <h2 id="posterTitle">Support Chronic Pain Management</h2>
+              <p id="posterSub">Non-invasive wIRA-based rehabilitation technology for professional care settings.</p>
+              <div id="posterFeatures" class="poster-features"></div>
+              <div id="posterCta" class="poster-cta">Book a Demo</div>
+            </div>
+          </div>
+          <div class="preview-actions">
+            <button type="button" id="downloadPngBtn" class="secondary-btn">导出预览PNG</button>
+            <button type="button" id="downloadAllBtn" class="secondary-btn">一键导出三套模板</button>
+            <button type="button" id="copyAllBtn" class="secondary-btn">复制全部文案</button>
+            <button type="button" id="downloadTxtBtn" class="secondary-btn">导出TXT</button>
+          </div>
+        </section>
+
+        <section class="output-grid">
+          <article class="output-panel">
+            <div class="panel-head">
+              <span>01</span>
+              <h2>图片中文字</h2>
+            </div>
+            <div id="imageCopy" class="copy-block"></div>
+          </article>
+
+          <article class="output-panel">
+            <div class="panel-head">
+              <span>02</span>
+              <h2>平台正文</h2>
+            </div>
+            <div id="postCopy" class="copy-block"></div>
+          </article>
+
+          <article class="output-panel">
+            <div class="panel-head">
+              <span>03</span>
+              <h2>广告标题 / CTA</h2>
+            </div>
+            <div id="adCopy" class="copy-block"></div>
+          </article>
+
+          <article class="output-panel">
+            <div class="panel-head">
+              <span>04</span>
+              <h2>图片生成提示词</h2>
+            </div>
+            <div id="promptCopy" class="copy-block"></div>
+          </article>
+
+          <article class="output-panel">
+            <div class="panel-head">
+              <span>05</span>
+              <h2>合规检查</h2>
+            </div>
+            <div id="complianceCopy" class="copy-block"></div>
+          </article>
+
+          <article class="output-panel">
+            <div class="panel-head">
+              <span>06</span>
+              <h2>推荐素材</h2>
+            </div>
+            <div id="assetCopy" class="copy-block"></div>
+          </article>
+        </section>
+      </section>
+    </main>
+
+    <canvas id="exportCanvas" width="1200" height="900" aria-hidden="true"></canvas>
+    <script src="app.js?v=2"></script>
+  </body>
+</html>
